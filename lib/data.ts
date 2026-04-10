@@ -1,3 +1,5 @@
+export const siteBase = process.env.NODE_ENV === "production" ? "/Codex" : "";
+
 export type Product = {
   slug: string;
   name: string;
@@ -79,11 +81,11 @@ export const products: Product[] = [
     giftingNote:
       "Available with ribbon finishing, occasion tags, and custom message cards for gifting.",
     label: "Best Seller",
-    image: "/images/products/collection-1.png",
+    image: `${siteBase}/images/products/collection-1.png`,
     gallery: [
-      "/images/products/collection-1.png",
-      "/images/products/collection-2.png",
-      "/images/products/collection-3.png"
+      `${siteBase}/images/products/collection-1.png`,
+      `${siteBase}/images/products/collection-2.png`,
+      `${siteBase}/images/products/collection-3.png`
     ]
   },
   {
@@ -99,11 +101,11 @@ export const products: Product[] = [
     giftingNote:
       "Custom hamper styling is available for birthdays, festive gifting, return gifts, and corporate boxes.",
     label: "Festive Pick",
-    image: "/images/products/collection-2.png",
+    image: `${siteBase}/images/products/collection-2.png`,
     gallery: [
-      "/images/products/collection-2.png",
-      "/images/products/collection-1.png",
-      "/images/products/collection-3.png"
+      `${siteBase}/images/products/collection-2.png`,
+      `${siteBase}/images/products/collection-1.png`,
+      `${siteBase}/images/products/collection-3.png`
     ]
   },
   {
@@ -119,11 +121,11 @@ export const products: Product[] = [
     giftingNote:
       "Ideal for birthdays, festive orders, and personalized gift boxes with curated flavor mixes.",
     label: "Signature",
-    image: "/images/products/collection-3.png",
+    image: `${siteBase}/images/products/collection-3.png`,
     gallery: [
-      "/images/products/collection-3.png",
-      "/images/products/collection-1.png",
-      "/images/products/collection-2.png"
+      `${siteBase}/images/products/collection-3.png`,
+      `${siteBase}/images/products/collection-1.png`,
+      `${siteBase}/images/products/collection-2.png`
     ]
   },
   {
@@ -139,11 +141,11 @@ export const products: Product[] = [
     giftingNote:
       "Designed for personalized gifting, themed events, festive boxes, and large-volume enquiries.",
     label: "Made for You",
-    image: "/images/products/collection-1.png",
+    image: `${siteBase}/images/products/collection-1.png`,
     gallery: [
-      "/images/products/collection-1.png",
-      "/images/products/collection-2.png",
-      "/images/products/collection-3.png"
+      `${siteBase}/images/products/collection-1.png`,
+      `${siteBase}/images/products/collection-2.png`,
+      `${siteBase}/images/products/collection-3.png`
     ]
   }
 ];
