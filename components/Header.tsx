@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
-import { brand, navLinks } from "@/lib/data";
+import { brand, navLinks, siteBase } from "@/lib/data";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -15,7 +15,7 @@ export function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3">
           <div className="relative h-11 w-11 overflow-hidden rounded-full border border-caramel/20 bg-white">
-            <Image src="/images/brand/logo.png" alt={brand.name} fill className="object-cover" />
+            <Image src={`${siteBase}/images/brand/logo.png`} alt={brand.name} fill className="object-cover" />
           </div>
           <div>
             <p className="font-display text-xl text-mocha">{brand.name}</p>
