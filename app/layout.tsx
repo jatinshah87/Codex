@@ -3,7 +3,7 @@ import { Playfair_Display, Manrope } from "next/font/google";
 
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { brand } from "@/lib/data";
+import { brand, siteBase } from "@/lib/data";
 
 import "./globals.css";
 
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: `${brand.name} | Premium Handmade Chocolates`,
     description:
       "Boutique handmade chocolates for gifting, celebrations, and premium custom orders in Vadodara.",
-    images: ["/images/brand/hero-poster.png"]
+    images: [`${siteBase}/images/brand/hero-poster.png`]
   }
 };
 
