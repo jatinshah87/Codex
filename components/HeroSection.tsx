@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { brand, featuredBadges, products } from "@/lib/data";
+import { brand, featuredBadges, products, siteBase } from "@/lib/data";
 
 export function HeroSection() {
   const heroProducts = products.slice(0, 3);
@@ -50,7 +50,7 @@ export function HeroSection() {
           <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/10 p-4 backdrop-blur">
             <div className="relative aspect-[4/5] overflow-hidden rounded-[26px]">
               <Image
-                src="/images/brand/hero-poster.png"
+                src={`${siteBase}/images/brand/hero-poster.png`}
                 alt="HR's Choco Bliss chocolate hero visual"
                 fill
                 className="object-cover"
