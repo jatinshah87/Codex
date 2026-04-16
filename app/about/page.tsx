@@ -1,51 +1,47 @@
 import type { Metadata } from "next";
 
-import { FeatureCard } from "@/components/FeatureCard";
 import { SectionHeading } from "@/components/SectionHeading";
+import { technicalMilestones, workflowSteps } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "About Us",
-  description:
-    "Learn the story, philosophy, and handcrafted approach behind HR's Choco Bliss, a premium homemade chocolate brand from Vadodara."
+  title: "Solution Blueprint",
+  description: "Detailed blueprint for the Asa Buy warehouse stocktake application."
 };
 
 export default function AboutPage() {
   return (
-    <div className="mx-auto max-w-7xl space-y-16 px-4 py-10 sm:px-6 lg:px-8">
-      <section className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
+    <div className="mx-auto max-w-7xl space-y-12 px-4 py-10 sm:px-6 lg:px-8">
+      <section className="rounded-[36px] border border-slate-200 bg-white p-8 shadow-[0_20px_60px_rgba(15,23,42,0.06)]">
         <SectionHeading
-          eyebrow="About HR's Choco Bliss"
-          title="A warm handcrafted brand built around taste, detail, and gift-worthy presentation."
-          description="HR’s Choco Bliss was created to turn handcrafted chocolates into a thoughtful, premium experience. Every piece is made with attention to taste, texture, freshness, and presentation—so each order feels personal and gift-worthy."
+          eyebrow="Blueprint"
+          title="Asa Buy is being shaped as a warehouse stocktake control tower, not just a counting screen."
+          description="The solution blueprint below reflects the exact business flow you described: plan by warehouse, assign by site, count by barcode location, reconcile against system stock, and export audit-ready variance reports."
         />
-        <div className="rounded-[36px] bg-gradient-to-br from-mocha via-truffle to-espresso p-8 text-cream shadow-luxe">
-          <p className="text-xs uppercase tracking-[0.3em] text-gold">Our Story</p>
-          <p className="mt-6 font-display text-4xl leading-tight">
-            From our home to your sweetest celebrations.
-          </p>
-          <p className="mt-5 text-base leading-8 text-cream/78">
-            The brand is rooted in making chocolates that feel more thoughtful than ordinary store-bought treats, with a boutique finish that fits gifting beautifully.
-          </p>
-        </div>
       </section>
 
-      <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-        <FeatureCard
-          title="Our Philosophy"
-          description="Luxury can feel warm, personal, and handmade when every detail is crafted intentionally."
+      <section className="grid gap-4 lg:grid-cols-2">
+        {workflowSteps.map((step) => (
+          <div key={step.phase} className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.05)]">
+            <p className="text-sm font-semibold text-cyan-700">{step.phase}</p>
+            <p className="mt-3 text-sm leading-7 text-slate-600">{step.detail}</p>
+          </div>
+        ))}
+      </section>
+
+      <section className="rounded-[36px] border border-slate-200 bg-slate-950 p-8 text-white shadow-[0_20px_60px_rgba(15,23,42,0.18)]">
+        <SectionHeading
+          eyebrow="Production Scope"
+          title="Recommended delivery direction for Android, iOS, tablets, and browser-based operations."
+          description="This concept is already designed responsively, and these are the technical milestones I would use to take it into a production build."
+          tone="inverse"
         />
-        <FeatureCard
-          title="Handcrafted"
-          description="Small-batch preparation allows better quality control, care, and consistency in every order."
-        />
-        <FeatureCard
-          title="Premium Presentation"
-          description="Gifting matters, so packaging and finish are designed to feel polished and occasion-ready."
-        />
-        <FeatureCard
-          title="Personal Touch"
-          description="Each order is handled with a boutique mindset so customers feel supported, seen, and celebrated."
-        />
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          {technicalMilestones.map((milestone) => (
+            <div key={milestone} className="rounded-[24px] border border-white/10 bg-white/5 p-5 text-sm leading-7 text-slate-300">
+              {milestone}
+            </div>
+          ))}
+        </div>
       </section>
     </div>
   );
