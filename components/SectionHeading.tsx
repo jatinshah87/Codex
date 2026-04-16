@@ -14,18 +14,18 @@ export function SectionHeading({
   tone = "default"
 }: SectionHeadingProps) {
   const alignment = align === "center" ? "text-center mx-auto" : "text-left";
-  const titleColor = tone === "inverse" ? "text-cream" : "text-mocha";
-  const bodyColor = tone === "inverse" ? "text-cream/80" : "text-espresso/78";
-  const eyebrowColor = tone === "inverse" ? "text-gold" : "text-caramel";
+  const titleColor = tone === "inverse" ? "text-white" : "text-slate-950";
+  const bodyColor = tone === "inverse" ? "text-slate-300" : "text-slate-600";
+  const eyebrowColor = tone === "inverse" ? "text-cyan-300" : "text-cyan-700";
 
   return (
-    <div className={`max-w-2xl ${alignment}`}>
+    <div className={`max-w-3xl ${alignment}`}>
       {eyebrow ? (
-        <p className={`mb-3 text-xs font-semibold uppercase tracking-[0.34em] ${eyebrowColor}`}>
+        <p className={`mb-3 text-xs font-semibold uppercase tracking-[0.28em] ${eyebrowColor}`}>
           {eyebrow}
         </p>
       ) : null}
-      <h2 className={`font-display text-3xl leading-tight sm:text-4xl ${titleColor}`}>
+      <h2 className={`font-display text-3xl leading-tight tracking-tight sm:text-4xl ${titleColor}`}>
         {title}
       </h2>
       {description ? (
