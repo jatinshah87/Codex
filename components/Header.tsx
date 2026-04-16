@@ -5,50 +5,42 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
-import { brand, navLinks, siteBase } from "@/lib/data";
+import { brand, navLinks } from "@/lib/data";
 
 export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-cream/80 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-[rgba(244,247,251,0.84)] backdrop-blur-xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3">
-          <div className="relative h-11 w-11 overflow-hidden rounded-full border border-caramel/20 bg-white">
-            <Image src={`${siteBase}/images/brand/logo.png`} alt={brand.name} fill className="object-cover" />
-          </div>
-          <div>
-            <p className="font-display text-xl text-mocha">{brand.name}</p>
-            <p className="text-[11px] uppercase tracking-[0.22em] text-caramel">
-              {brand.tagline}
-            </p>
+          <div className="relative h-12 w-[176px] overflow-hidden rounded-xl bg-white px-2 py-1 shadow-sm">
+            <Image src="/asabuy-logo.svg" alt={`${brand.name} logo`} fill className="object-contain" priority />
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex">
+        <nav className="hidden items-center gap-7 lg:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-espresso transition hover:text-caramel"
+              className="text-sm font-medium text-slate-600 transition hover:text-cyan-700"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden lg:block">
-          <Link
-            href={brand.whatsappLink}
-            className="inline-flex items-center rounded-full bg-mocha px-5 py-3 text-sm font-semibold text-cream transition hover:bg-espresso"
-          >
-            Order Now
-          </Link>
-        </div>
+        <Link
+          href="/shop/audit-console"
+          className="hidden rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-cyan-800 lg:inline-flex"
+        >
+          Open Demo Workspace
+        </Link>
 
         <button
           type="button"
-          className="inline-flex rounded-full border border-mocha/10 p-2 text-mocha lg:hidden"
+          className="inline-flex rounded-2xl border border-slate-200 bg-white p-2.5 text-slate-700 lg:hidden"
           onClick={() => setOpen((value) => !value)}
           aria-label="Toggle menu"
           aria-expanded={open}
@@ -58,23 +50,24 @@ export function Header() {
       </div>
 
       {open ? (
-        <div className="border-t border-mocha/10 bg-cream lg:hidden">
+        <div className="border-t border-slate-200 bg-white lg:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-4 sm:px-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-2xl px-4 py-3 text-sm font-medium text-espresso transition hover:bg-white"
+                className="rounded-2xl px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100"
                 onClick={() => setOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
             <Link
-              href={brand.whatsappLink}
-              className="mt-2 inline-flex items-center justify-center rounded-full bg-mocha px-5 py-3 text-sm font-semibold text-cream transition hover:bg-espresso"
+              href="/shop/audit-console"
+              className="mt-2 inline-flex items-center justify-center rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-cyan-800"
+              onClick={() => setOpen(false)}
             >
-              Order Now
+              Open Demo Workspace
             </Link>
           </nav>
         </div>
