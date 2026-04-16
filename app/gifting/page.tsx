@@ -1,70 +1,47 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
-import { ContactForm } from "@/components/ContactForm";
-import { CTASection } from "@/components/CTASection";
-import { FeatureCard } from "@/components/FeatureCard";
 import { SectionHeading } from "@/components/SectionHeading";
-import { brand, giftingTypes } from "@/lib/data";
+
+const roadmap = [
+  {
+    stage: "Phase 1",
+    title: "Responsive stocktake web application",
+    detail: "Deliver the core audit planning, counting, Excel upload, and variance reporting workflows in a browser-first interface that works well on tablets and scanners."
+  },
+  {
+    stage: "Phase 2",
+    title: "Backend services and database",
+    detail: "Add authentication, warehouse masters, item masters, counting transactions, Excel parsing, reconciliation jobs, and role-based permissions."
+  },
+  {
+    stage: "Phase 3",
+    title: "Native mobile extensions",
+    detail: "Extend the same workflow into Android and iOS application packages if the business needs app-store distribution, offline mode, or deeper scanner integration."
+  }
+];
 
 export const metadata: Metadata = {
-  title: "Custom Orders and Gifting",
-  description:
-    "Request premium chocolate gift boxes, custom hampers, event favors, and celebration-ready homemade chocolates from HR's Choco Bliss."
+  title: "Delivery Roadmap",
+  description: "Delivery roadmap for the Asa Buy stocktake platform."
 };
 
 export default function GiftingPage() {
   return (
-    <div className="mx-auto max-w-7xl space-y-16 px-4 py-10 sm:px-6 lg:px-8">
-      <section className="rounded-[40px] bg-hero-mesh px-6 py-12 text-cream shadow-luxe sm:px-10 lg:px-14">
-        <SectionHeading
-          eyebrow="Custom Orders / Gifting"
-          title="Boutique chocolate gifting made for meaningful celebrations."
-          description="Choose HR's Choco Bliss for premium presentation, small-batch freshness, and custom gifting details that help every order feel warm, elegant, and memorable."
-          tone="inverse"
-        />
-      </section>
-
-      <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-        {giftingTypes.map((item, index) => (
-          <FeatureCard
-            key={item}
-            title={item}
-            description="Custom assortments, refined packaging, and order support tailored to your occasion and gifting scale."
-            accent={index % 2 === 0 ? "from-white/90 to-blush/50" : "from-white/90 to-[#f0e4d7]"}
-          />
-        ))}
-      </section>
-
-      <section className="grid gap-8 lg:grid-cols-[1fr_1fr]">
-        <div className="space-y-6 rounded-[32px] border border-mocha/10 bg-white p-8 shadow-soft">
-          <SectionHeading
-            eyebrow="Why Choose Us"
-            title="A thoughtful gifting experience, not just a box of chocolates."
-            description="Every custom order is designed with taste, visual polish, and occasion-readiness in mind."
-          />
-          <div className="grid gap-4 text-sm leading-7 text-espresso/78">
-            <p>Packaging customization available for birthdays, festive hampers, and celebration boxes.</p>
-            <p>Message card options can be added to make gifts feel personal and beautifully finished.</p>
-            <p>Bulk order enquiries are supported for festive gifting, return favors, and corporate gifting needs.</p>
-          </div>
-          <Link
-            href={brand.whatsappLink}
-            className="inline-flex items-center rounded-full bg-mocha px-6 py-3 text-sm font-semibold text-cream transition hover:bg-espresso"
-          >
-            Start Your Gifting Enquiry
-          </Link>
-        </div>
-
-        <div>
-          <ContactForm />
-        </div>
-      </section>
-
-      <CTASection
-        title="Need a custom quote for gifting or bulk orders?"
-        description="Share your occasion, quantity, preferred style, and delivery timeline. WhatsApp and Instagram enquiries are both welcome."
+    <div className="mx-auto max-w-6xl space-y-10 px-4 py-10 sm:px-6 lg:px-8">
+      <SectionHeading
+        eyebrow="Roadmap"
+        title="A practical delivery path from concept to production rollout."
+        description="This phased roadmap is how I would take Asa Buy from the current responsive application concept to a full warehouse-ready solution."
       />
+      <div className="grid gap-5">
+        {roadmap.map((item) => (
+          <div key={item.stage} className="rounded-[32px] border border-slate-200 bg-white p-7 shadow-[0_18px_48px_rgba(15,23,42,0.06)]">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-700">{item.stage}</p>
+            <h3 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950">{item.title}</h3>
+            <p className="mt-3 text-sm leading-7 text-slate-600">{item.detail}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
