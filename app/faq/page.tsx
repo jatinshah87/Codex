@@ -1,54 +1,49 @@
 import type { Metadata } from "next";
 
-import { FAQItem } from "@/components/FAQItem";
 import { SectionHeading } from "@/components/SectionHeading";
-import { faqs } from "@/lib/data";
 
-export const metadata: Metadata = {
-  title: "FAQ and Delivery Info",
-  description:
-    "Find answers about storage instructions, delivery timelines, custom order lead times, gifting FAQs, shelf life, and the order process for HR's Choco Bliss."
-};
-
-const deliveryFaqs = [
+const faqs = [
   {
-    question: "How should I store the chocolates?",
+    question: "Can the staff use barcode scanners?",
     answer:
-      "Keep them in a cool, dry place away from heat and direct sunlight. Light refrigeration can help in warmer weather, but bring them to room temperature before serving."
+      "Yes. The counting flow is suitable for handheld devices that send barcode values as keyboard input, and it can later support native camera or scanner SDK integration."
   },
   {
-    question: "What are your delivery timelines?",
+    question: "Can the app support both first check and second check?",
     answer:
-      "Delivery timelines depend on order size and customization, but standard orders are generally fulfilled faster than custom gifting requests."
+      "Yes. Each site in a stocktake plan can have separate first check and second check users, and the reporting layer compares both result sets."
   },
   {
-    question: "How much lead time do custom orders need?",
+    question: "Can item master and stock be uploaded from Excel?",
     answer:
-      "Custom gifting and bulk orders usually need advance notice so presentation, quantity, and finishing details can be planned properly."
+      "Yes. The audit workspace is designed with dedicated import points for item master creation and system stock creation before reconciliation."
   },
   {
-    question: "What is the shelf life?",
+    question: "Will variance reports be downloadable in Excel?",
     answer:
-      "Shelf life varies by product type and weather conditions, but freshness guidance is shared clearly with each order."
-  },
-  {
-    question: "How does the order process work?",
-    answer:
-      "Browse the collection, send a WhatsApp or Instagram enquiry, confirm your requirements, and then receive order and customization guidance."
+      "Yes. The reporting module is built around two exportable reports: first check versus second check, and counted stock versus system stock."
   }
 ];
 
+export const metadata: Metadata = {
+  title: "Stocktake FAQ",
+  description: "Frequently asked questions for the Asa Buy stocktake application."
+};
+
 export default function FAQPage() {
   return (
-    <div className="mx-auto max-w-5xl space-y-10 px-4 py-10 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-5xl space-y-8 px-4 py-10 sm:px-6 lg:px-8">
       <SectionHeading
-        eyebrow="FAQ / Delivery Info"
-        title="Answers for storage, lead times, ordering, and gifting details."
-        description="Everything customers usually want to know before placing a premium handmade chocolate order."
+        eyebrow="FAQ"
+        title="Quick answers about the stocktake process and the app capability."
+        description="These answers reflect the operational model currently implemented in the application concept."
       />
       <div className="grid gap-4">
-        {[...faqs, ...deliveryFaqs].map((faq) => (
-          <FAQItem key={faq.question} question={faq.question} answer={faq.answer} />
+        {faqs.map((faq) => (
+          <div key={faq.question} className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.05)]">
+            <h3 className="text-lg font-semibold tracking-tight text-slate-950">{faq.question}</h3>
+            <p className="mt-3 text-sm leading-7 text-slate-600">{faq.answer}</p>
+          </div>
         ))}
       </div>
     </div>
