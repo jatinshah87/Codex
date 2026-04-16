@@ -2,30 +2,18 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="mx-auto flex min-h-[60vh] max-w-3xl flex-col items-center justify-center px-4 py-16 text-center sm:px-6 lg:px-8">
-      <p className="text-xs font-semibold uppercase tracking-[0.34em] text-caramel">
-        Page Not Found
+    <div className="mx-auto flex min-h-[60vh] max-w-3xl flex-col items-center justify-center px-4 py-16 text-center">
+      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-700">Not Found</p>
+      <h1 className="mt-4 font-display text-5xl tracking-tight text-slate-950">This Asa Buy module does not exist.</h1>
+      <p className="mt-4 max-w-xl text-base leading-7 text-slate-600">
+        The page you tried to open is not part of the current stocktake application prototype.
       </p>
-      <h1 className="mt-5 font-display text-4xl leading-tight text-mocha sm:text-5xl">
-        This chocolate trail ends here.
-      </h1>
-      <p className="mt-5 max-w-xl text-base leading-8 text-espresso/78">
-        The page you were looking for may have moved, but the collection is still ready to explore.
-      </p>
-      <div className="mt-8 flex flex-wrap justify-center gap-3">
-        <Link
-          href="/shop"
-          className="inline-flex items-center rounded-full bg-mocha px-6 py-3 text-sm font-semibold text-cream transition hover:bg-espresso"
-        >
-          Browse Shop
-        </Link>
-        <Link
-          href="/"
-          className="inline-flex items-center rounded-full border border-mocha/10 px-6 py-3 text-sm font-semibold text-mocha transition hover:border-caramel hover:text-caramel"
-        >
-          Back Home
-        </Link>
-      </div>
+      <Link
+        href="/"
+        className="mt-8 inline-flex rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-cyan-800"
+      >
+        Return to dashboard
+      </Link>
     </div>
   );
 }
