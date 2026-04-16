@@ -1,9 +1,315 @@
 export const siteBase = process.env.NODE_ENV === "production" ? "/Codex" : "";
 
+export type UserRole = "Super Admin" | "Audit" | "Staff";
+
+export type RoleSummary = {
+  role: UserRole;
+  title: string;
+  description: string;
+  responsibilities: string[];
+  highlight: string;
+};
+
+export type WarehouseNode = {
+  warehouse: string;
+  sites: {
+    name: string;
+    code: string;
+    firstCheck: string;
+    secondCheck: string;
+    locations: {
+      code: string;
+      label: string;
+      barcode: string;
+    }[];
+  }[];
+};
+
+export type ItemMasterRecord = {
+  itemNumber: string;
+  description: string;
+  category: string;
+  warehouse: string;
+  site: string;
+  location: string;
+  uoms: string[];
+};
+
+export type StockTakePlan = {
+  warehouse: string;
+  cycle: string;
+  auditOwner: string;
+  status: "Draft" | "Assigned" | "In Progress" | "Ready for Reconciliation";
+  sites: {
+    site: string;
+    firstCheck: string;
+    secondCheck: string;
+    dueDate: string;
+  }[];
+};
+
+export type VarianceRow = {
+  itemNumber: string;
+  location: string;
+  uom: string;
+  firstCheck: number;
+  secondCheck: number;
+  systemStock: number;
+};
+
+export const brand = {
+  name: "Asa Buy",
+  tagline: "Warehouse Stocktake Platform",
+  description:
+    "A mobile-first stock audit application for planning, counting, reconciliation, and Excel-based reporting across warehouses, sites, and barcode locations.",
+  location: "Multi-warehouse operations",
+  whatsapp: "0000000000",
+  whatsappLink: "#overview",
+  instagram: "#overview",
+  facebook: "#overview",
+  email: "ops@asabuy.example.com"
+};
+
+export const navLinks = [
+  { href: "#overview", label: "Overview" },
+  { href: "#workflow", label: "Workflow" },
+  { href: "#roles", label: "Roles" },
+  { href: "#mobile", label: "Mobile Count" },
+  { href: "#reports", label: "Reports" }
+];
+
+export const platformStats = [
+  { label: "User roles", value: "3", note: "Super Admin, Audit, Staff" },
+  { label: "Warehouse hierarchy", value: "4-level", note: "Warehouse -> Site -> Location -> Barcode" },
+  { label: "Variance reports", value: "2", note: "First vs Second and Physical vs System" },
+  { label: "Input channels", value: "Excel + Scan", note: "Master uploads and live handheld counting" }
+];
+
+export const roleSummaries: RoleSummary[] = [
+  {
+    role: "Super Admin",
+    title: "Controls structure, users, and compliance settings",
+    description:
+      "Super admins govern master setup across warehouses, sites, locations, user roles, and audit readiness.",
+    responsibilities: [
+      "Create warehouses, sites, and barcode-enabled locations",
+      "Manage users and role-based permissions",
+      "Monitor stocktake completion and operational exceptions"
+    ],
+    highlight: "Owns the platform setup and access control."
+  },
+  {
+    role: "Audit",
+    title: "Plans stocktakes and performs reconciliation",
+    description:
+      "Audit users create warehouse-specific stocktake plans, assign first and second check staff, upload Excel masters, and publish variance reports.",
+    responsibilities: [
+      "Create stocktake plans by warehouse and site",
+      "Upload item master and current system stock through Excel",
+      "Run variance analysis and export reports to Excel"
+    ],
+    highlight: "Owns plan creation, imports, reconciliation, and reporting."
+  },
+  {
+    role: "Staff",
+    title: "Executes the physical count on handheld or tablet",
+    description:
+      "Staff users perform first and second checks by scanning location and item barcodes, selecting UOM, and entering physical quantity.",
+    responsibilities: [
+      "Receive assigned site tasks for first or second check",
+      "Scan location code and item code from the floor",
+      "Record quantities by pack size or UOM such as carton or each"
+    ],
+    highlight: "Owns accurate physical stock capture in the warehouse."
+  }
+];
+
+export const workflowSteps = [
+  {
+    phase: "1. Master Setup",
+    detail:
+      "Audit uploads item master and current stock through Excel. Each item carries number, description, category, warehouse, site, location, and UOM mapping."
+  },
+  {
+    phase: "2. Plan Creation",
+    detail:
+      "Audit creates a stocktake plan for a warehouse, selects the cycle, and assigns first and second check staff for each site."
+  },
+  {
+    phase: "3. Physical Counting",
+    detail:
+      "Assigned staff use a mobile device with barcode scanner to scan location, scan item, choose UOM, enter quantity, and save the count."
+  },
+  {
+    phase: "4. Reconciliation",
+    detail:
+      "After counts finish, audit uploads or confirms system stock and the platform compares first check, second check, and system quantities."
+  },
+  {
+    phase: "5. Reporting",
+    detail:
+      "Users review variances, filter by warehouse/site/item/location, and export Excel reports for follow-up and sign-off."
+  }
+];
+
+export const warehouseTree: WarehouseNode[] = [
+  {
+    warehouse: "Central Distribution Hub",
+    sites: [
+      {
+        name: "Site A",
+        code: "SA",
+        firstCheck: "R. Patel",
+        secondCheck: "J. Khan",
+        locations: [
+          { code: "A-01-01", label: "Fast moving aisle", barcode: "LOC-A-01-01" },
+          { code: "A-02-04", label: "Bulk pallet rack", barcode: "LOC-A-02-04" }
+        ]
+      },
+      {
+        name: "Site B",
+        code: "SB",
+        firstCheck: "L. Mehta",
+        secondCheck: "S. Nair",
+        locations: [
+          { code: "B-01-02", label: "Returns cage", barcode: "LOC-B-01-02" },
+          { code: "B-03-05", label: "Reserve storage", barcode: "LOC-B-03-05" }
+        ]
+      }
+    ]
+  },
+  {
+    warehouse: "West Regional Warehouse",
+    sites: [
+      {
+        name: "Site C",
+        code: "SC",
+        firstCheck: "A. Joseph",
+        secondCheck: "P. Shah",
+        locations: [
+          { code: "C-05-01", label: "Carton pick face", barcode: "LOC-C-05-01" },
+          { code: "C-06-03", label: "Overflow lane", barcode: "LOC-C-06-03" }
+        ]
+      }
+    ]
+  }
+];
+
+export const itemMasterRecords: ItemMasterRecord[] = [
+  {
+    itemNumber: "ITM-100245",
+    description: "Industrial gloves nitrile blue",
+    category: "Safety Consumables",
+    warehouse: "Central Distribution Hub",
+    site: "Site A",
+    location: "A-01-01",
+    uoms: ["Carton", "Each"]
+  },
+  {
+    itemNumber: "ITM-200118",
+    description: "LED inspection torch",
+    category: "Maintenance Tools",
+    warehouse: "Central Distribution Hub",
+    site: "Site B",
+    location: "B-03-05",
+    uoms: ["Box", "Each"]
+  },
+  {
+    itemNumber: "ITM-310907",
+    description: "Packaging tape heavy duty",
+    category: "Packaging",
+    warehouse: "West Regional Warehouse",
+    site: "Site C",
+    location: "C-05-01",
+    uoms: ["Bundle", "Roll"]
+  }
+];
+
+export const stockTakePlans: StockTakePlan[] = [
+  {
+    warehouse: "Central Distribution Hub",
+    cycle: "April 2026 Week 3",
+    auditOwner: "Audit Team North",
+    status: "In Progress",
+    sites: [
+      { site: "Site A", firstCheck: "R. Patel", secondCheck: "J. Khan", dueDate: "16 Apr 2026" },
+      { site: "Site B", firstCheck: "L. Mehta", secondCheck: "S. Nair", dueDate: "17 Apr 2026" }
+    ]
+  },
+  {
+    warehouse: "West Regional Warehouse",
+    cycle: "April 2026 Week 4",
+    auditOwner: "Audit Team West",
+    status: "Assigned",
+    sites: [{ site: "Site C", firstCheck: "A. Joseph", secondCheck: "P. Shah", dueDate: "21 Apr 2026" }]
+  }
+];
+
+export const varianceRows: VarianceRow[] = [
+  {
+    itemNumber: "ITM-100245",
+    location: "A-01-01",
+    uom: "Carton",
+    firstCheck: 24,
+    secondCheck: 22,
+    systemStock: 23
+  },
+  {
+    itemNumber: "ITM-200118",
+    location: "B-03-05",
+    uom: "Each",
+    firstCheck: 117,
+    secondCheck: 117,
+    systemStock: 121
+  },
+  {
+    itemNumber: "ITM-310907",
+    location: "C-05-01",
+    uom: "Roll",
+    firstCheck: 46,
+    secondCheck: 44,
+    systemStock: 44
+  }
+];
+
+export const mobileCountSteps = [
+  "Open assigned stocktake task by warehouse and site",
+  "Scan location barcode to confirm the rack/bin",
+  "Scan item barcode or enter item number manually",
+  "Select pack size or UOM such as carton, bundle, box, or each",
+  "Enter physical quantity and submit the count",
+  "Repeat until the assigned site reaches 100% completion"
+];
+
+export const uploadModules = [
+  {
+    title: "Item Master Upload",
+    detail:
+      "Excel upload for item number, description, category, warehouse, site, location, barcode link, and UOM definitions."
+  },
+  {
+    title: "System Stock Upload",
+    detail:
+      "Excel upload for current stock balances by item, location, and UOM before running reconciliation."
+  },
+  {
+    title: "Variance Export",
+    detail:
+      "Excel download of variance between first and second check, and Excel download of physical versus system stock."
+  }
+];
+
+export const technicalMilestones = [
+  "Responsive web application optimized for Android tablets, iPads, and mobile handheld devices",
+  "Barcode-driven counting flow designed for rugged scanners and camera-based scanning integration later",
+  "Role-based access model prepared for secure login and audit traceability",
+  "Excel import/export-ready UI prepared for backend parsing and validation services"
+];
+
 export type Product = {
   slug: string;
   name: string;
-  category: "Truffles" | "Gift Hampers" | "Assorted Boxes" | "Custom Orders";
+  category: string;
   price: string;
   shortDescription: string;
   description: string;
@@ -15,187 +321,43 @@ export type Product = {
   gallery: string[];
 };
 
-export const brand = {
-  name: "HR's Choco Bliss",
-  tagline: "Premium Handmade Chocolates",
-  location: "Vadodara, Gujarat, India",
-  whatsapp: "9725151379",
-  whatsappLink:
-    "https://wa.me/919725151379?text=Hello%20HR's%20Choco%20Bliss,%20I%20would%20love%20to%20place%20an%20order.",
-  instagram:
-    "https://www.instagram.com/hrschocobliss/?utm_source=ig_web_button_share_sheet",
-  facebook: "https://www.facebook.com/profile.php?id=61578409451544",
-  email: "hello@hrschocobliss.com"
-};
-
-export const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/shop", label: "Shop" },
-  { href: "/gifting", label: "Gifting" },
-  { href: "/about", label: "About" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/contact", label: "Contact" }
-];
-
 export const featuredBadges = [
-  "Handcrafted",
-  "Freshly Made",
-  "Gift Ready",
-  "Premium Finish"
-];
-
-export const trustFeatures = [
-  {
-    title: "Small-batch handcrafted chocolates",
-    description:
-      "Made with a personal touch in carefully curated batches for better taste, texture, and finish."
-  },
-  {
-    title: "Premium ingredients and refined finish",
-    description:
-      "Elegant flavor pairings and a boutique look designed to feel indulgent from first glance to final bite."
-  },
-  {
-    title: "Elegant gifting and festive presentation",
-    description:
-      "Boxes, hampers, and occasion-ready assortments created to feel thoughtful, polished, and celebratory."
-  },
-  {
-    title: "Freshly prepared with attention to detail",
-    description:
-      "Orders are prepared with care so freshness, quality, and presentation stay beautifully aligned."
-  }
+  "Barcode led",
+  "Audit ready",
+  "Excel compatible",
+  "Tablet friendly"
 ];
 
 export const products: Product[] = [
   {
-    slug: "velvet-truffle-box",
-    name: "Velvet Truffle Box",
-    category: "Truffles",
-    price: "₹699",
-    shortDescription: "A refined box of rich handmade truffles with a smooth, indulgent finish.",
+    slug: "audit-console",
+    name: "Audit Console",
+    category: "Control",
+    price: "Module",
+    shortDescription: "Create plans, assign staff, import masters, and reconcile stocktake cycles.",
     description:
-      "Velvet Truffle Box is designed for the buyer who wants elegant chocolate gifting with a luxurious feel. Each piece is finished for a boutique presentation and balanced sweetness.",
-    ingredients: ["Premium chocolate", "Cocoa solids", "Milk solids", "Nuts", "Natural flavorings"],
-    shelfLife: "Best enjoyed within 10 to 12 days when stored in a cool, dry place.",
-    giftingNote:
-      "Available with ribbon finishing, occasion tags, and custom message cards for gifting.",
-    label: "Best Seller",
-    image: `${siteBase}/images/products/collection-1.png`,
-    gallery: [
-      `${siteBase}/images/products/collection-1.png`,
-      `${siteBase}/images/products/collection-2.png`,
-      `${siteBase}/images/products/collection-3.png`
-    ]
-  },
-  {
-    slug: "celebration-gift-hamper",
-    name: "Celebration Gift Hamper",
-    category: "Gift Hampers",
-    price: "₹1,299",
-    shortDescription: "A festive gifting hamper curated for birthdays, celebrations, and premium surprises.",
-    description:
-      "This hamper blends handmade chocolates, elegant packaging, and a gift-worthy presentation for celebrations that deserve warmth and charm.",
-    ingredients: ["Assorted chocolates", "Decorative inclusions", "Milk solids", "Dark chocolate", "Seasonal accents"],
-    shelfLife: "Best enjoyed within 8 to 10 days for peak freshness and texture.",
-    giftingNote:
-      "Custom hamper styling is available for birthdays, festive gifting, return gifts, and corporate boxes.",
-    label: "Festive Pick",
-    image: `${siteBase}/images/products/collection-2.png`,
-    gallery: [
-      `${siteBase}/images/products/collection-2.png`,
-      `${siteBase}/images/products/collection-1.png`,
-      `${siteBase}/images/products/collection-3.png`
-    ]
-  },
-  {
-    slug: "assorted-bliss-collection",
-    name: "Assorted Bliss Collection",
-    category: "Assorted Boxes",
-    price: "₹849",
-    shortDescription: "A boutique assortment of signature shapes, textures, and flavors for elegant sharing.",
-    description:
-      "Assorted Bliss Collection brings together signature bites in a premium box that works beautifully for both indulgent self-treats and thoughtful gifting.",
-    ingredients: ["White chocolate", "Dark chocolate", "Milk chocolate", "Sprinkles", "Cocoa butter"],
-    shelfLife: "Best enjoyed within 10 days when refrigerated lightly and served at room temperature.",
-    giftingNote:
-      "Ideal for birthdays, festive orders, and personalized gift boxes with curated flavor mixes.",
-    label: "Signature",
-    image: `${siteBase}/images/products/collection-3.png`,
-    gallery: [
-      `${siteBase}/images/products/collection-3.png`,
-      `${siteBase}/images/products/collection-1.png`,
-      `${siteBase}/images/products/collection-2.png`
-    ]
-  },
-  {
-    slug: "custom-occasion-box",
-    name: "Custom Occasion Box",
-    category: "Custom Orders",
-    price: "Quote on Request",
-    shortDescription: "Tailored chocolate gifting designed around your occasion, theme, and presentation style.",
-    description:
-      "From birthdays to premium event favors, Custom Occasion Box lets you personalize flavors, packaging, quantity, and presentation for a more memorable gifting experience.",
-    ingredients: ["Customized by preference", "Chocolate base of choice", "Decorative toppings", "Personalized inserts"],
-    shelfLife: "Shelf life varies by customization; details are shared at the time of order confirmation.",
-    giftingNote:
-      "Designed for personalized gifting, themed events, festive boxes, and large-volume enquiries.",
-    label: "Made for You",
-    image: `${siteBase}/images/products/collection-1.png`,
-    gallery: [
-      `${siteBase}/images/products/collection-1.png`,
-      `${siteBase}/images/products/collection-2.png`,
-      `${siteBase}/images/products/collection-3.png`
-    ]
-  }
-];
-
-export const testimonials = [
-  {
-    quote:
-      "The taste, the finish, and the packaging all felt premium. It looked beautiful and tasted even better.",
-    author: "A gifting customer from Vadodara"
-  },
-  {
-    quote:
-      "Perfect for gifting. The chocolates felt thoughtful, fresh, and far more special than store-bought options.",
-    author: "Birthday order customer"
-  },
-  {
-    quote:
-      "The custom box felt personal and elegant. Everyone asked where the chocolates were from.",
-    author: "Event hamper buyer"
+      "The Audit Console is the core operational workspace for creating stocktake plans, assigning first and second checks, and publishing variance reports.",
+    ingredients: ["Planning", "Assignments", "Excel import", "Variance analysis"],
+    shelfLife: "Live operational module.",
+    giftingNote: "Supports warehouse-specific cycles and audit reviews.",
+    label: "Core",
+    image: `${siteBase}/images/brand/hero-poster.png`,
+    gallery: [`${siteBase}/images/brand/hero-poster.png`]
   }
 ];
 
 export const faqs = [
   {
-    question: "Do you take custom orders?",
-    answer:
-      "Yes. HR's Choco Bliss accepts custom gifting, themed boxes, hamper requests, and bulk celebration orders based on availability and lead time."
-  },
-  {
-    question: "How fresh are the chocolates?",
-    answer:
-      "Chocolates are prepared in small batches with freshness in mind, so they arrive tasting rich, smooth, and gifting-ready."
-  },
-  {
-    question: "Do you offer gifting options?",
-    answer:
-      "Yes. Elegant gift boxes, hampers, message cards, and presentation upgrades can be arranged for birthdays, festive gifting, and premium occasions."
-  },
-  {
-    question: "How do I place an order?",
-    answer:
-      "You can browse the collection, then enquire or order through WhatsApp or Instagram for quick confirmation, customization, and quote support."
+    question: "Can users count stock by location and item barcode?",
+    answer: "Yes. The staff counting flow is designed around scanning location and item codes before entering quantities."
   }
 ];
 
 export const giftingTypes = [
-  "Birthdays and personal celebrations",
-  "Return gifts and intimate party favors",
-  "Festive hampers and occasion boxes",
-  "Corporate gifting and client hampers"
+  "Warehouse planning",
+  "Barcode counting",
+  "Excel reconciliation",
+  "Variance export"
 ];
 
-export const shopCategories = ["All", "Truffles", "Gift Hampers", "Assorted Boxes", "Custom Orders"] as const;
+export const shopCategories = ["All", "Control"] as const;
