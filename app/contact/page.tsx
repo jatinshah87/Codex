@@ -1,58 +1,35 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
-import { ContactForm } from "@/components/ContactForm";
 import { SectionHeading } from "@/components/SectionHeading";
-import { brand } from "@/lib/data";
+
+const implementationNotes = [
+  "Authentication with role-based access for Super Admin, Audit, and Staff users",
+  "Warehouse, site, location, and barcode master maintenance",
+  "Excel upload validation for item master and system stock files",
+  "Stocktake transaction history with audit trail by user, time, and device",
+  "Excel export service for both variance reports"
+];
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Contact HR's Choco Bliss for chocolate orders, custom gift boxes, WhatsApp enquiries, and premium gifting support in Vadodara."
+  title: "Implementation Notes",
+  description: "Implementation notes and build considerations for Asa Buy."
 };
 
 export default function ContactPage() {
   return (
-    <div className="mx-auto max-w-7xl space-y-12 px-4 py-10 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-6xl space-y-10 px-4 py-10 sm:px-6 lg:px-8">
       <SectionHeading
-        eyebrow="Contact"
-        title="Let’s plan your next chocolate order, gifting box, or custom hamper."
-        description="Reach out for product orders, custom gifting, festive enquiries, or premium bulk requests."
+        eyebrow="Implementation Notes"
+        title="What would come next after this application concept."
+        description="The current build demonstrates the product structure and user flows. These are the backend and platform layers I would add next for a live deployment."
       />
-
-      <section className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-        <ContactForm />
-        <aside className="grid gap-5 rounded-[32px] border border-mocha/10 bg-white p-8 shadow-soft">
-          <div>
-            <p className="text-xs uppercase tracking-[0.24em] text-caramel">WhatsApp</p>
-            <Link href={brand.whatsappLink} className="mt-2 block font-display text-3xl text-mocha">
-              +91 {brand.whatsapp}
-            </Link>
+      <div className="grid gap-4 md:grid-cols-2">
+        {implementationNotes.map((note) => (
+          <div key={note} className="rounded-[28px] border border-slate-200 bg-white p-6 text-sm leading-7 text-slate-600 shadow-[0_16px_40px_rgba(15,23,42,0.05)]">
+            {note}
           </div>
-          <div>
-            <p className="text-xs uppercase tracking-[0.24em] text-caramel">Instagram</p>
-            <Link href={brand.instagram} className="mt-2 block text-sm text-espresso transition hover:text-caramel">
-              @hrschocobliss
-            </Link>
-          </div>
-          <div>
-            <p className="text-xs uppercase tracking-[0.24em] text-caramel">Email</p>
-            <a href={`mailto:${brand.email}`} className="mt-2 block text-sm text-espresso transition hover:text-caramel">
-              {brand.email}
-            </a>
-          </div>
-          <div>
-            <p className="text-xs uppercase tracking-[0.24em] text-caramel">Location</p>
-            <p className="mt-2 text-sm text-espresso">{brand.location}</p>
-          </div>
-          <div>
-            <p className="text-xs uppercase tracking-[0.24em] text-caramel">Facebook</p>
-            <Link href={brand.facebook} className="mt-2 block text-sm text-espresso transition hover:text-caramel">
-              Visit Facebook Page
-            </Link>
-          </div>
-        </aside>
-      </section>
+        ))}
+      </div>
     </div>
   );
 }
